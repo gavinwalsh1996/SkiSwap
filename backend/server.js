@@ -37,7 +37,7 @@ App.get('/workouts', async (req, res) => {
     } catch (err) {p
       res.status(500).json({ message: err.message })
     }
-  })
+  }) // test
   
   // Get one workout by ID
   App.get('/workouts/:id', getWorkout, (req, res) => {
