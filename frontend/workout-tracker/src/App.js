@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
 
 function App() {
+
+  // State for all workouts
+  const [allWorkouts, setAllWorkouts] = useState([])
+
+  const getData = async () => {
+    const data = await fetch('http://localhost:4000/workouts/')
+    const json = await data.json()
+    setAllWorkouts(json)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+      <h1>HellO!</h1>
+      <h1>All Workouts:</h1>
+
+      {allWorkouts.map((workout) => (
+          <>
+            <div>{workout.type}</div>
+            <div>{workout.reps}</div>
+            <div>{workout.weight}</div>
+          </>
+      ))}
     </div>
-  );
+    
+  )
 }
 
-export default App;
+export default App

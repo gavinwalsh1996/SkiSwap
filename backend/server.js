@@ -1,6 +1,8 @@
 require('dotenv').config() // .env file for env variables
 const express = require('express')
+const cors = require('cors')
 const App = express()
+App.use(cors())
 const mongoose = require('mongoose')
 // const router = express.Router()
 
