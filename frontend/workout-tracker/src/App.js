@@ -1,36 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from '../src/pages/Login';
+import Profile from '../src/pages/Profile'
 
-function App() {
+const App = () => (
+  <Router>
 
-  // State for all workouts
-  const [allWorkouts, setAllWorkouts] = useState([])
 
-  const getData = async () => {
-    const data = await fetch('http://localhost:4000/workouts/')
-    const json = await data.json()
-    setAllWorkouts(json)
-  }
 
-  useEffect(() => {
-    getData()
-  }, [])
+    {/* Routes */}
+    <Routes>
+      <Route path="/" element={<Login />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/profile" element={<Profile />}></Route>
+    </Routes>
+  </Router>
+);
 
-  return (
-
-    <div>
-      <h1>HellO!</h1>
-      <h1>All Workouts:</h1>
-
-      {allWorkouts.map((workout) => (
-          <>
-            <div>{workout.type}</div>
-            <div>{workout.reps}</div>
-            <div>{workout.weight}</div>
-          </>
-      ))}
-    </div>
-    
-  )
-}
-
-export default App
+export default App;

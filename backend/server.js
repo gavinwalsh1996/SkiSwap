@@ -1,101 +1,41 @@
+// Routes & controllers, connect to DB, Schema, Models
+
 require('dotenv').config() // .env file for env variables
 const express = require('express')
+const router = express.Router();
 const cors = require('cors')
 const App = express()
 App.use(cors())
 const mongoose = require('mongoose')
-// const router = express.Router()
 
 // Middleware
 App.use(express.json())
+App.use('/', router);
 
 App.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
 })
 
-// Middleware function to get workout by ID
-async function getWorkout(req, res, next) {
-    let workout
-    try {
-      workout = await Workout.findById(req.params.id)
-      if (workout == null) {
-        return res.status(404).json({ message: 'Cannot find workout' })
-      }
-    } catch (err) {
-      return res.status(500).json({ message: err.message })
-    }
-  
-    res.workout = workout
-    next()
-  }
+// ROUTES FOR USERS
 
-// Routes
-// Get all workouts
-App.get('/workouts', async (req, res) => {
-    try {
-      const workouts = await Workout.find()
-      res.json(workouts)
-    } catch (err) {p
-      res.status(500).json({ message: err.message })
-    }
-  }) // test
-  
-  // Get one workout by ID
-  App.get('/workouts/:id', getWorkout, (req, res) => {
-    res.json(res.workout)
-  })
-  
-  // Create a new workout
-  App.post('/workouts', async (req, res) => {
-    const workout = new Workout({
-      type: req.body.type,
-      reps: req.body.reps,
-      weight: req.body.weight
-    })
-  
-    try {
-      const newWorkout = await workout.save()
-      res.status(201).json(newWorkout)
-    } catch (err) {
-      res.status(400).json({ message: err.message })
-    }
-  })
-  
-  // Update a workout by ID
-  App.patch('/workouts/:id', getWorkout, async (req, res) => {
-    if (req.body.type != null) {
-      res.workout.type = req.body.type
-    }
-    if (req.body.reps != null) {
-      res.workout.reps = req.body.reps
-    }
-    if (req.body.weight != null) {
-      res.workout.weight = req.body.weight
-    }
-  
-    try {
-      const updatedWorkout = await res.workout.save()
-      res.json(updatedWorkout)
-    } catch (err) {
-      res.status(400).json({ message: err.message })
-    }
-  })
-  
-  // Delete a workout by ID
-  App.delete('/workouts/:id', getWorkout, async (req, res) => {
-    try {
-      await res.workout.remove()
-      res.json({ message: 'Deleted Workout' })
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  })
-  
-  
-  
+// Create User
+  router.post('/register', (req, res) => { // '/register' is route, controller function follows which can be seperated.
+    const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    });
 
-
+    newUser.save((error) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else {
+            res.status(200).json({ message: 'User created successfully' });
+        }
+    });
+});
+  
 
 // Connect to Database
 mongoose.connect(process.env.MONGO_URI)
@@ -110,37 +50,19 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(err)
   })
 
-// Schema
-const workoutSchema = new mongoose.Schema({
-    type: {
-      type: String,
-      required: true
-    },
-    reps: {
-      type: Number,
-      required: true
-    },
-    weight: {
-      type: Number,
-      required: true
-    }
-  });
 
-// Model
-const Workout = mongoose.model("Workout", workoutSchema);
+  // Schemas for users
 
-// Create a new workout
-const newWorkout = new Workout({
-    type: "Chest press",
-    reps: 12,
-    weight: 45
-  });
-  
-  newWorkout.save((error) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Workout saved successfully");
-    }
-  });
+  // Create User
+  const UserSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    // items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }]
+});
+
+  // Model for Create User
+  const User = mongoose.model('User', UserSchema);
+
+
   
