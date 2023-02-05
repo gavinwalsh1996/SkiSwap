@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from '../components/Button'
 
 //Icons
 import MenuIcon from '@mui/icons-material/Menu';
@@ -54,7 +55,8 @@ function Navbar() { // Navbar receives logo and links props from parent
         {/* Ternary operator toggles the display value of elements based on current state */}
       <div className={`${ isOpen ? "block" : "hidden" } lg:flex lg:items-center lg:w-auto h-screen lg:h-20`} >
          {/* I added background blur to contrast the mobile header as the bg color only starts to show on scroll */}
-        <button className="border-black border-2 w-24 h-12 rounded-3xl hover:bg-yellow-300"><span className="font-bold text-xl">Sign Up</span></button>
+        {/* <button className="border-black border-2 w-24 h-12 rounded-3xl hover:bg-yellow-300"><span className="font-bold text-xl">Sign Up</span></button> */}
+        <Button buttonText={'Sign Up'}  />
       </div>
     </nav>
   );
