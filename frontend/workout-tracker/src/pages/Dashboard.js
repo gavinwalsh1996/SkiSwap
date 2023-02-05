@@ -10,7 +10,7 @@ function Dashboard() {
   return (
 
   <div className='flex flex-col bg-slate-100 gap-5'>
-    <div className='flex justify-around items-center'>
+    <div className='flex justify-around items-center flex-col sm:flex-row'>
         <UserProfileImage name={'Gavin'}  />
         <div className='flex gap-2'>
           <Button buttonText={'Find'}  />

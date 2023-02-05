@@ -35,6 +35,36 @@ App.use((req, res, next) => {
         }
     });
 });
+
+// Login
+router.post('/login', async (req, res) => {
+  // Verify user credentials
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(401).json({ message: 'Email or password is invalid' });
+  }
+  const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+  if (!passwordMatch) {
+    return res.status(401).json({ message: 'Email or password is invalid' });
+  }
+
+  // Generate JWT
+  const payload = { id: user._id };
+  const secret = process.env.JWT_SECRET;
+  const options = { expiresIn: '1d' };
+  const token = jwt.sign(payload, secret, options);
+
+  // Return JWT to user
+  return res.json({ token });
+});
+
+
+
+// Update user information
+// Read information
+// Delete user
+// Forgot password
+
   
 
 // Connect to Database

@@ -39,7 +39,7 @@ function Navbar() { // Navbar receives logo and links props from parent
         z-50 ${scrolled ? 'bg-slate-300 dark:bg-slate-900' : ''}`}>
 
         {/* Logo */}
-        <span className="lg:block hidden cursor-pointer font-bold text-3xl">Logo</span>
+        <span className="lg:block hidden cursor-pointer font-bold text-3xl">SkiSwap</span>
 
         {/* Button for mobile nav. OnClick function toggles the state value*/}
         {/* Ternary operator changes icon based on current value of state*/}
