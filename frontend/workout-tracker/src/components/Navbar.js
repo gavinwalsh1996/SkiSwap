@@ -64,8 +64,8 @@ function Navbar({links}) { // Navbar receives logo and links props from parent
                    </div>
                 </>
             ))}
-            <div className="flex gap-3">
-              <span><NotificationsNoneIcon sx={{cursor: 'pointer'}}/></span>
+            <div className="flex gap-4">
+              <span><NotificationsNoneIcon sx={{cursor: 'pointer'}}/>3</span>
               <span><SendIcon sx={{cursor: 'pointer'}}/></span>
             </div>
       </div>

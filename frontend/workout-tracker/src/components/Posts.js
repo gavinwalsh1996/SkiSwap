@@ -7,9 +7,9 @@ const MarketplaceDashboard = () => {
     <div className="p-10">
       <div className="flex justify-around">
         <h2 className="text-2xl font-bold">Your Postings</h2>
-        <h2 className="text-2xl font-bold">All Postings <ArrowRightAltIcon/></h2>
+        {/* <h2 className="text-2xl font-bold">All Postings <ArrowRightAltIcon/></h2> */}
       </div>
-      <div className="flex items-center justify-around mt-4 gap-4">
+      <div className="flex items-center justify-around mt-4 gap-4 flex-col">
         <div className="flex gap-2">
         <button className="bg-yellow-400 text-black hover:bg-yellow-300 py-2 px-4 rounded-full">
           Active(2)
