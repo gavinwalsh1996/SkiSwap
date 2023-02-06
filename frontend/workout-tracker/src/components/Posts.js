@@ -1,5 +1,6 @@
 import React from "react";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import SearchIcon from '@mui/icons-material/Search';
 
 const MarketplaceDashboard = () => {
   return (
@@ -17,12 +18,13 @@ const MarketplaceDashboard = () => {
           All(5)
         </button>
         </div>
-        <div className="relative w-64">
+        <div className="relative w-64 flex justify-center items-center gap-2">
           <input
             type="text"
             className="bg-gray-200 p-2 rounded-full w-full"
             placeholder="Search job postings"
           />
+         <SearchIcon sx={{cursor: 'pointer'}}/>
         </div>
       </div>
     </div>
