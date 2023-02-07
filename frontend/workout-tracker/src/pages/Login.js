@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import backgroundImage from '../images/snowboards.jpg'
 import Modal from '../components/Modal'
 import Button from '../components/Button'
 
 function Login() {
+
+  //State for modal
+  const [openModal, setOpenModal] = useState(false)
+
+  // Function to opem modal
+  const toggleModal = () => {
+    setOpenModal(openModal => !openModal);
+  }
 
   return (
     // Navbar for landing page
@@ -13,7 +21,8 @@ function Login() {
           z-50'>
           {/* Logo */}
           <span className="lg:block hidden cursor-pointer font-bold text-3xl">SkiSwap</span>
-          <Button buttonText={'Sign Up'}  />
+          <Button buttonText={'Sign Up'} toggleModal={toggleModal}  />
+          <Modal openModal={openModal} toggleModal={toggleModal}/>
       </nav>
 
         <div className='flex flex-col gap-8 pt-96 p-8 justify-between'>
